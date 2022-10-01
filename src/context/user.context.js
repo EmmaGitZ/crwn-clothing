@@ -13,7 +13,7 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
   const value = { currentUser, setCurrentUser }
-
+  // we set up the actual storage first before we started actually setting up the separate call for that data
   // signOutUser()
 
   useEffect(() => {
