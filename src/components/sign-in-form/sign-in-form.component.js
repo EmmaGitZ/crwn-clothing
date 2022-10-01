@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import FormInput from '../form-input/form-input.component'
 import Button from '../button/button.component'
+// this usercontext object is going to give us back whatever value is passed in for the value
+// import { UserContext } from '../../context/user.context'
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
@@ -17,24 +19,24 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { email, password } = formFields
 
-  console.log(formFields)
+  // const { setCurrentUser } = useContext(UserContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup()
+    await signInWithGooglePopup()
+    // setCurrentUser(user)
     // console.log(response)
-    await createUserDocumentFromAuth(user)
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password)
-      console.log(response)
+      const { user } = await signInAuthUserWithEmailAndPassword(email, password)
+      // setCurrentUser(user)
       resetFormFields()
     } catch (error) {
       switch (error.code) {
